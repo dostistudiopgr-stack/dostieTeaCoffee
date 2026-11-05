@@ -1,0 +1,194 @@
+/* ─── Tailwind CSS v4 ─────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ─── Google Fonts (fallback – loaded via index.html preconnect) ─ */
+/* Fonts are loaded in index.html for optimal performance */
+
+/* ─── Brand Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-primary:        var(--brand-primary, #244C36);
+  --color-primary-deep:   var(--brand-dark, #173B2B);
+  --color-cream:          var(--brand-background, #FAF7EF);
+  --color-gold:           var(--brand-accent, #C5A15A);
+  --color-gold-light:     var(--brand-accent, #C5A15A);
+  --color-white:          #FFFFFF;
+  --color-text:           #292D28;
+  --color-text-secondary: #73786F;
+  --color-border:         #E8E4D9;
+  --color-bg:             var(--brand-background, #FAF7EF);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Border Radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:  0 4px 12px rgba(36, 76, 54, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 10px 30px rgba(36, 76, 54, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-xl:  0 20px 50px rgba(36, 76, 54, 0.14), 0 8px 16px rgba(0, 0, 0, 0.08);
+
+  /* Spacing */
+  --container-max:     1280px;
+  --container-padding: 1.5rem;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+}
+
+/* ─── Tailwind theme extension (v4 inline theming) ───────────── */
+@theme {
+  --color-primary:        var(--brand-primary, #244C36);
+  --color-primary-deep:   var(--brand-dark, #173B2B);
+  --color-cream:          var(--brand-background, #FAF7EF);
+  --color-gold:           var(--brand-accent, #C5A15A);
+  --color-gold-light:     var(--brand-accent, #C5A15A);
+  --color-text-main:      #292D28;
+  --color-text-secondary: #73786F;
+  --color-border-brand:   #E8E4D9;
+
+  --font-family-heading:  'Playfair Display', Georgia, serif;
+  --font-family-body:     'DM Sans', system-ui, sans-serif;
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+}
+
+/* ─── Global Reset & Base (in @layer base so Tailwind utilities can override) ── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Typography ─────────────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Button reset — in @layer base so Tailwind bg/border/padding utilities WIN ── */
+  button {
+    cursor: pointer;
+    font-family: var(--font-body);
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+/* ─── Container Utility ───────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* ─── Focus Visible ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Scrollbar (Webkit) ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ─── Selection ───────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+/* ─── Keyframe animations (used by Modal, ConfirmDialog) ──────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
